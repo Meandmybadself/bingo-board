@@ -1,29 +1,26 @@
 {
   "name": "bingo-board",
-  "private": true,
   "version": "1.0.0",
   "type": "module",
-  "main": "dist/bingo-board.es.js",
-  "exports": {
-    ".": "./dist/bingo-board.es.js"
-  },
-  "types": "types/bingo-board.d.ts",
   "files": [
     "dist",
     "types"
   ],
+  "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build"
+    "dev": "parcel index.html",
+    "build": "parcel build index.html"
   },
   "dependencies": {
     "lit": "^2.6.1",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
+    "@parcel/transformer-sass": "^2.8.3",
     "@types/lodash": "^4.14.191",
+    "parcel": "^2.8.3",
+    "parcel-transformer-lit-sass": "^0.1.0",
     "sass": "^1.57.1",
-    "typescript": "^4.9.3",
-    "vite": "^4.0.4"
+    "typescript": "^4.9.3"
   }
 }
