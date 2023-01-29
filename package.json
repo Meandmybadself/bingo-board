@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "type": "module",
   "main": "dist/bingo-board.mjs",
-  "module": "dist/bingo-board.mjs",
   "exports": {
     ".": "./dist/bingo-board.mjs"
   },
@@ -13,23 +12,19 @@
     "types"
   ],
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build"
+    "dev": "parcel index.html",
+    "build": "parcel build"
   },
   "dependencies": {
     "lit": "^2.6.1",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "@rollup/plugin-node-resolve": "^15.0.1",
-    "@rollup/plugin-terser": "^0.4.0",
+    "@parcel/transformer-sass": "^2.8.3",
     "@types/lodash": "^4.14.191",
-    "@web/rollup-plugin-copy": "^0.3.0",
-    "@web/rollup-plugin-html": "^1.11.0",
-    "rollup": "^3.12.0",
-    "rollup-plugin-summary": "^2.0.0",
+    "parcel": "^2.8.3",
+    "parcel-transformer-lit-sass": "^0.1.0",
     "sass": "^1.57.1",
-    "typescript": "^4.9.3",
-    "vite": "^4.0.4"
+    "typescript": "^4.9.3"
   }
 }

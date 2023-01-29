@@ -1,6 +1,6 @@
 import { LitElement, html } from 'lit'
 import { customElement, state } from 'lit/decorators.js'
-import styles from './bingo-board.scss?inline'
+import styles from 'litsass:./bingo-board.scss'
 import range from 'lodash/range'
 
 interface LetterNumber {
