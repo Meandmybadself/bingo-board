@@ -2,18 +2,14 @@
   "name": "bingo-board",
   "version": "1.0.0",
   "type": "module",
-  "main": "dist/bingo-board.mjs",
-  "exports": {
-    ".": "./dist/bingo-board.mjs"
-  },
-  "types": "types/bingo-board.d.ts",
   "files": [
     "dist",
     "types"
   ],
+  "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
     "dev": "parcel index.html",
-    "build": "parcel build"
+    "build": "parcel build index.html"
   },
   "dependencies": {
     "lit": "^2.6.1",
