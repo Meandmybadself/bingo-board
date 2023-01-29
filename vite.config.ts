@@ -4,7 +4,7 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   build: {
     lib: {
-      entry: 'index.html',
+      entry: 'src/bingo-board.ts',
       formats: ['es'],
     },
     rollupOptions: {
