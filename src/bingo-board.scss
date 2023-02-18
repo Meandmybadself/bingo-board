@@ -9,6 +9,10 @@ li {
                                   supported by Chrome, Edge, Opera and Firefox */
 }
 
+* {
+  font-family: "Oswald", sans-serif;
+}
+
 div.board {
   display: grid;
   grid-template-columns: 1fr 8fr 2fr;
@@ -32,11 +36,26 @@ div.current {
   background: white;
   color: black;
   & > .letter {
-    font-size: 4em;
+    font-size: 5.5em;
   }
   & > .number {
     font-size: 2em;
   }
+  .help {
+    width: 1em;
+    height: 1em;
+    border: 2px solid black;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.25em;
+    padding: 0.3em;
+  }
+}
+
+*[role="button"] {
+  cursor: pointer;
 }
 
 ul {
@@ -56,13 +75,17 @@ ul {
   &.letters {
     grid-column: 1/2;
     background: white;
-    color: red;
     grid-column: 1/2;
-    font-size: 4em;
+    li {
+      color: red;
+      font-size: 7em;
+      font-weight: 800;
+    }
   }
   &.numbers {
     grid-column: 2/3;
     color: white;
+    padding: 0 3em;
     li {
       // number row
       flex: 1;
@@ -75,7 +98,8 @@ ul {
         width: 100%;
         li.number {
           flex: 1;
-          font-size: 2.5em;
+          font-size: 2.75em;
+          transition: color 0.2s ease-in-out;
           &.marked {
             color: red;
           }
