@@ -1,4 +1,4 @@
-import { LitElement, html } from 'lit'
+import { LitElement, html, nothing } from 'lit'
 import { customElement, state } from 'lit/decorators.js'
 import importedStyles from 'litsass:./bingo-board.scss'
 import range from 'lodash/range'
@@ -44,6 +44,9 @@ export class BingoBoard extends LitElement {
   @state()
   private _set: Set = []
 
+  @state()
+  private _isHelpShowing = false
+
   private _markedNumbers: number[] = []
 
   connectedCallback() {
@@ -52,7 +55,6 @@ export class BingoBoard extends LitElement {
   }
 
   private _startGame(restart = false) {
-    this._makeFullscreen()
     if (!restart && localStorage.getItem('set')) {
       this._set = JSON.parse(localStorage.getItem('set')!)
       this._markedNumbers = JSON.parse(localStorage.getItem('markedNumbers')!)
@@ -115,13 +117,28 @@ export class BingoBoard extends LitElement {
     }
   }
 
-  _showHelp() {
 
-  }
 
   render() {
+
+    const help = this._isHelpShowing ? html`
+      <div class="help-modal"
+        @click=${() => this._isHelpShowing = false}
+      >
+        <div class="help__content">
+          <div class="help__close button" role="button" @click=${() => this._isHelpShowing = false}>✖</div>
+          <h1>How to play</h1>
+          <p>Click on the current number/letter to get a new one.</p>
+          <p>Click on BINGO to start a new game.</p>
+        </div>
+        
+      </div>` : nothing
+
     return html`
-      <div class="board">
+      ${help}
+      <div class="board"
+        @click=${() => this._makeFullscreen()}
+      >
         <ul role="button" class="letters" @click=${() => this._startGame(true)}>
           ${letters.map(letter => html`<li>${letter}</li>`)}
         </ul>
@@ -132,14 +149,17 @@ export class BingoBoard extends LitElement {
           role="button"
           @click=${() => {
 
-        this._makeFullscreen()
+
         this._currentLetterNumber = this._getRandomLetterNumber()
         this._persistState()
       }}
         >
           <div class="letter">${this._currentLetterNumber?.letter}</div>
           <div class="number">${this._currentLetterNumber?.number}</div>
-          <div class="help" role="button" @click=${() => this._showHelp()}>?</div>
+          <div class="help button" role="button" @click=${(e: MouseEvent) => {
+        e.stopPropagation()
+        this._isHelpShowing = true
+      }}>?</div>
         </div>
       </div>
     `
