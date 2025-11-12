@@ -1,14 +1,17 @@
 {
   "compilerOptions": {
     "module": "ESNext",
+    "target": "ES2020",
+    "rootDir": "./src",
     "lib": [
       "ES2020",
       "DOM",
       "DOM.Iterable"
     ],
     "declaration": true,
-    "emitDeclarationOnly": true,
-    "outDir": "./types",
+    "declarationDir": "./types",
+    "emitDeclarationOnly": false,
+    "outDir": "./dist",
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -24,10 +27,5 @@
   },
   "include": [
     "src/**/*.ts"
-  ],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    }
   ]
 }

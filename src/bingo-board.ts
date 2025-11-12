@@ -1,6 +1,6 @@
 import { LitElement, html, nothing } from 'lit'
 import { customElement, state } from 'lit/decorators.js'
-import importedStyles from 'litsass:./bingo-board.scss'
+import boardStyles from './bingo-board.styles.js'
 import range from 'lodash/range'
 
 interface LetterNumber {
@@ -36,7 +36,7 @@ const generateSet = (): Set => letters.map(letter => ({
 
 @customElement('bingo-board')
 export class BingoBoard extends LitElement {
-  static styles = importedStyles
+  static styles = boardStyles
 
   @state()
   private _currentLetterNumber: LetterNumber | undefined = undefined
