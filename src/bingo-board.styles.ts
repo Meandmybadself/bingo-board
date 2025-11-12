@@ -11,9 +11,6 @@ export const boardStyles = css`
     user-select: none;
   }
 
-  * {
-    font-family: 'Oswald', sans-serif;
-  }
 
   div.board {
     position: relative;
@@ -85,10 +82,16 @@ export const boardStyles = css`
   div.current > .letter {
     font-size: 5.5em;
     line-height: 0.9em;
+    font-family: "Gotham Rounded A", "Gotham Rounded B";
+    font-style: normal;
+    font-weight: 700;
   }
 
   div.current > .number {
     font-size: 2.5em;
+    font-family: "Gotham Rounded A", "Gotham Rounded B";
+    font-style: normal;
+    font-weight: 700;
   }
 
   *[role='button'] {
@@ -120,31 +123,49 @@ export const boardStyles = css`
   ul.letters li {
     color: red;
     font-size: 7em;
-    font-weight: 800;
+    font-family: "Gotham Rounded A", "Gotham Rounded B";
+    font-style: normal;
+    font-weight: 700;
   }
 
   ul.numbers {
     grid-column: 2 / 3;
     color: white;
-    padding: 0 3em;
+    padding: 0 2.5em;
   }
 
   ul.numbers li ul {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
   }
 
   ul.numbers li ul li.number {
-    flex: 1;
-    font-size: 2.75em;
-    transition: color 0.2s ease-in-out;
+    font-size: 3.25em;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    font-family: "Gotham Rounded A", "Gotham Rounded B";
+    font-style: normal;
+    font-weight: 500;
+    border-radius: 50%;
+    width: 1.8em;
+    height: 1.8em;
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #222;
+    color: white;
   }
 
   ul.numbers li ul li.number.marked {
     color: red;
+  }
+
+  ul.numbers li ul li.number.last-clicked {
+    background: red;
+    color: #222;
   }
 `
 

@@ -10,8 +10,6 @@ interface LetterNumber {
 
 const letters = ['B', 'I', 'N', 'G', 'O']
 
-type Set = { letter: string, numbers: number[] }[]
-
 const getRangeForLetter = (letter: string): number[] => {
   switch (letter) {
     case 'B':
@@ -29,10 +27,14 @@ const getRangeForLetter = (letter: string): number[] => {
   }
 }
 
-const generateSet = (): Set => letters.map(letter => ({
-  letter,
-  numbers: getRangeForLetter(letter)
-}))
+const getLetterForNumber = (number: number): string => {
+  if (number >= 1 && number < 16) return 'B'
+  if (number >= 16 && number < 31) return 'I'
+  if (number >= 31 && number < 46) return 'N'
+  if (number >= 46 && number < 61) return 'G'
+  if (number >= 61 && number < 76) return 'O'
+  return ''
+}
 
 @customElement('bingo-board')
 export class BingoBoard extends LitElement {
@@ -42,11 +44,9 @@ export class BingoBoard extends LitElement {
   private _currentLetterNumber: LetterNumber | undefined = undefined
 
   @state()
-  private _set: Set = []
-
-  @state()
   private _isHelpShowing = false
 
+  @state()
   private _markedNumbers: number[] = []
 
   connectedCallback() {
@@ -55,57 +55,25 @@ export class BingoBoard extends LitElement {
   }
 
   private _startGame(restart = false) {
-    if (!restart && localStorage.getItem('set')) {
-      this._set = JSON.parse(localStorage.getItem('set')!)
+    if (!restart && localStorage.getItem('markedNumbers')) {
       this._markedNumbers = JSON.parse(localStorage.getItem('markedNumbers')!)
-      this._currentLetterNumber = JSON.parse(localStorage.getItem('currentLetterNumber')!)
+      const currentLetterNumberStr = localStorage.getItem('currentLetterNumber')
+      if (currentLetterNumberStr) {
+        this._currentLetterNumber = JSON.parse(currentLetterNumberStr)
+      }
     } else {
-      this._set = generateSet()
       this._markedNumbers = []
       this._currentLetterNumber = undefined
     }
-    // this._currentLetterNumber = this._getRandomLetterNumber()
     this._persistState()
   }
 
-
   private _persistState() {
-    if (this._set) {
-      localStorage.setItem('set', JSON.stringify(this._set))
-    }
     if (this._markedNumbers) {
       localStorage.setItem('markedNumbers', JSON.stringify(this._markedNumbers))
     }
     if (this._currentLetterNumber) {
       localStorage.setItem('currentLetterNumber', JSON.stringify(this._currentLetterNumber))
-    }
-  }
-
-
-  private _getRandomLetterNumber(): LetterNumber {
-    // If the set is empty, start a new game.
-    if (!this._set.length) {
-      this._startGame(true)
-    }
-
-    const randomLetterIndex = Math.floor(Math.random() * this._set.length)
-    const randomLetter = this._set[randomLetterIndex]
-    const randomLetterNumberIndex = Math.floor(Math.random() * randomLetter.numbers.length)
-    const randomLetterNumber = randomLetter.numbers[randomLetterNumberIndex]
-
-    // Remove the number from the set.
-    this._set[randomLetterIndex].numbers.splice(randomLetterNumberIndex, 1)
-
-    // If the letter is exhaused, remove it from the set.
-    if (!this._set[randomLetterIndex].numbers.length) {
-      this._set.splice(randomLetterIndex, 1)
-    }
-
-    this._markedNumbers.push(randomLetterNumber)
-
-    return {
-      letter: randomLetter.letter,
-      number: randomLetterNumber
     }
   }
 
@@ -115,6 +83,28 @@ export class BingoBoard extends LitElement {
     if (el) {
       el.requestFullscreen()
     }
+  }
+
+  private _toggleNumber(number: number, e: MouseEvent) {
+    e.stopPropagation()
+    debugger
+    const index = this._markedNumbers.indexOf(number)
+    if (index > -1) {
+      // Unmark the number
+      this._markedNumbers = [...this._markedNumbers.slice(0, index), ...this._markedNumbers.slice(index + 1)]
+      // Clear current display if this was the current number
+      if (this._currentLetterNumber?.number === number) {
+        this._currentLetterNumber = undefined
+      }
+    } else {
+      // Mark the number and set it as current
+      this._markedNumbers = [...this._markedNumbers, number]
+      this._currentLetterNumber = {
+        letter: getLetterForNumber(number),
+        number
+      }
+    }
+    this._persistState()
   }
 
 
@@ -128,7 +118,7 @@ export class BingoBoard extends LitElement {
         <div class="help__content">
           <div class="help__close button" role="button" @click=${() => this._isHelpShowing = false}>✖</div>
           <h1>How to play</h1>
-          <p>Click on the current number/letter to get a new one.</p>
+          <p>Click on a number to mark it and display it in the current area.</p>
           <p>Click on BINGO to start a new game.</p>
         </div>
         
@@ -143,17 +133,9 @@ export class BingoBoard extends LitElement {
           ${letters.map(letter => html`<li>${letter}</li>`)}
         </ul>
         <ul class="numbers">
-          ${letters.map(letter => html`<li><ul>${getRangeForLetter(letter).map(number => html`<li class="number ${this._markedNumbers.includes(number) ? 'marked' : ''}">${number}</li>`)}</ul></li>`)}
+          ${letters.map(letter => html`<li><ul>${getRangeForLetter(letter).map(number => html`<li class="number ${this._markedNumbers.includes(number) ? 'marked' : ''} ${this._currentLetterNumber?.number === number ? 'last-clicked' : ''}" role="button" @click=${(e: MouseEvent) => this._toggleNumber(number, e)}>${number}</li>`)}</ul></li>`)}
         </ul>
-        <div class="current"
-          role="button"
-          @click=${() => {
-
-
-        this._currentLetterNumber = this._getRandomLetterNumber()
-        this._persistState()
-      }}
-        >
+        <div class="current">
           <div class="letter">${this._currentLetterNumber?.letter}</div>
           <div class="number">${this._currentLetterNumber?.number}</div>
           <div class="help button" role="button" @click=${(e: MouseEvent) => {
