@@ -9,9 +9,9 @@
       "DOM.Iterable"
     ],
     "declaration": true,
-    "declarationDir": "./types",
+    "declarationDir": "./build/types",
     "emitDeclarationOnly": false,
-    "outDir": "./dist",
+    "outDir": "./build",
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,

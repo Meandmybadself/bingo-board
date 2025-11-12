@@ -3,14 +3,13 @@
   "version": "1.0.0",
   "type": "module",
   "files": [
-    "dist",
-    "types"
+    "build"
   ],
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
     "dev": "tsc --watch --preserveWatchOutput",
-    "build": "npm run clean && tsc -p tsconfig.json",
-    "clean": "rm -rf dist types",
+    "build": "npm run clean && tsc -p tsconfig.json && cp index.html CNAME build/",
+    "clean": "rm -rf build",
     "serve": "python3 -m http.server 4173"
   },
   "dependencies": {

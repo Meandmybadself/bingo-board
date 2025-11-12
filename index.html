@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap" rel="stylesheet">
     <title>Bingo</title>
+    <link rel="icon" href="data:,">
     <style>
       body,
       html {
@@ -17,6 +18,15 @@
         padding: 0;
       }
     </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "lit": "https://esm.sh/lit@2.6.1",
+          "lit/": "https://esm.sh/lit@2.6.1/",
+          "lodash/": "https://esm.sh/lodash@4.17.21/"
+        }
+      }
+    </script>
     <script type="module" src="./dist/bingo-board.js"></script>
   </head>
   <body>
