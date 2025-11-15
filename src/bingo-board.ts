@@ -1,7 +1,7 @@
-import { LitElement, html, nothing } from 'lit'
+import { LitElement, html } from 'lit'
 import { customElement, state } from 'lit/decorators.js'
-import boardStyles from './bingo-board.styles.js'
 import range from 'lodash/range'
+import boardStyles from './bingo-board.styles.js'
 
 interface LetterNumber {
   letter: string
