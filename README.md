@@ -10,6 +10,7 @@ Game administrators pull numbered balls from a bin & this screen represents the 
 
 ![Bingo Board in action](./gameplay.jpg)
 
+I try to incrementally improve the code / UI each year.
 
 ## Usage
 

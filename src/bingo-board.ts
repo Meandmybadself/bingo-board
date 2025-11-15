@@ -1,7 +1,7 @@
-import { LitElement, html, nothing } from 'lit'
+import { LitElement, html } from 'lit'
 import { customElement, state } from 'lit/decorators.js'
-import boardStyles from './bingo-board.styles.js'
 import range from 'lodash/range'
+import boardStyles from './bingo-board.styles.js'
 
 interface LetterNumber {
   letter: string
@@ -76,7 +76,6 @@ export class BingoBoard extends LitElement {
 
   private _toggleNumber(number: number, e: MouseEvent) {
     e.stopPropagation()
-    debugger
     const index = this._markedNumbers.indexOf(number)
     if (index > -1) {
       // Unmark the number

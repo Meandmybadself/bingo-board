@@ -23,13 +23,14 @@ export const boardStyles = css`
   div.board {
     position: relative;
     display: grid;
-    grid-template-columns: 1fr 6fr 1fr;
-    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: 2fr 5fr 2fr;
     background: #222;
     width: 100%;
     height:100%;
     font-family: Helvetica, sans-serif;
     font-weight: 800;
+    border-radius: 1em;
+    min-height: 700px;
   }
 
   div.current {
@@ -46,7 +47,7 @@ export const boardStyles = css`
   }
 
   div.current > .letter {
-    font-size: 6em;
+    font-size: 5em;
     line-height: 0.9em;
     font-family: "Gotham Rounded A", "Gotham Rounded B";
     font-style: normal;
@@ -54,7 +55,7 @@ export const boardStyles = css`
   }
 
   div.current > .number {
-    font-size: 2em;
+    font-size: 3em;
     font-family: "Gotham Rounded A", "Gotham Rounded B";
     font-style: normal;
     font-weight: 700;
@@ -88,7 +89,7 @@ export const boardStyles = css`
 
   ul.letters li {
     color: red;
-    font-size: 6em;
+    font-size: 7em;
     font-family: "Gotham Rounded A", "Gotham Rounded B";
     font-style: normal;
     font-weight: 700;
@@ -109,14 +110,14 @@ export const boardStyles = css`
   }
 
   ul.numbers li ul li.number {
-    font-size: 3em;
+    font-size: 2.5em;
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
     font-family: "Gotham Rounded A", "Gotham Rounded B";
     font-style: normal;
     font-weight: 500;
     border-radius: 50%;
-    width: 1.8em;
-    height: 1.8em;
+    width: 2em;
+    height: 2em;
     flex: 0 0 auto;
     display: flex;
     align-items: center;
