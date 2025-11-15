@@ -38,6 +38,22 @@ jobs:
       - name: Build
         run: pnpm run build
 
+      - name: Verify build output
+        run: |
+          if [ ! -f dist/index.html ]; then
+            echo "Error: dist/index.html not found"
+            exit 1
+          fi
+          if [ ! -f dist/bingo-board.js ]; then
+            echo "Error: dist/bingo-board.js not found"
+            exit 1
+          fi
+          if grep -q "src/bingo-board.ts" dist/index.html; then
+            echo "Error: dist/index.html still references TypeScript source"
+            exit 1
+          fi
+          echo "Build verification passed"
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
