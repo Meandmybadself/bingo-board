@@ -14,6 +14,17 @@
         width: 100%;
         margin: 0;
         padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .container {
+        background-color: white;
+      }
+      bingo-board {
+        margin: 10vh 0;
+        height: 80vh;
       }
     </style>
     <script type="importmap">
@@ -26,8 +37,20 @@
       }
     </script>
     <script type="module" src="./src/bingo-board.ts"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const container = document.querySelector('.container')
+        if (container) {
+          container.addEventListener('request-fullscreen', () => {
+            container.requestFullscreen()
+          })
+        }
+      })
+    </script>
   </head>
   <body>
-    <bingo-board></bingo-board>
+    <div class="container">
+        <bingo-board></bingo-board>
+    </div>
   </body>
 </html>

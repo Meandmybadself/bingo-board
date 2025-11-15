@@ -11,59 +11,25 @@ export const boardStyles = css`
     user-select: none;
   }
 
+  :host {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+  }
 
   div.board {
     position: relative;
     display: grid;
-    grid-template-columns: 1fr 8fr 2fr;
+    grid-template-columns: 1fr 6fr 1fr;
     grid-template-rows: repeat(5, 1fr);
     background: #222;
     width: 100%;
-    height: 100%;
+    height:100%;
     font-family: Helvetica, sans-serif;
     font-weight: 800;
-  }
-
-  .button {
-    width: 1em;
-    height: 1em;
-    border: 2px solid black;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.25em;
-    padding: 0.3em;
-  }
-
-  div.help-modal {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  div.help-modal .help__content {
-    position: relative;
-    background-color: white;
-    width: 30%;
-    height: 50;
-    text-align: center;
-    padding: 2.5em;
-  }
-
-  div.help-modal .help__content .help__close {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    font-size: 1em;
-    padding-top: 0.25em;
   }
 
   div.current {
@@ -73,14 +39,14 @@ export const boardStyles = css`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 5rem;
+    font-size: 3rem;
     font-weight: 700;
     background: white;
-    color: black;
+    color: #222;
   }
 
   div.current > .letter {
-    font-size: 5.5em;
+    font-size: 6em;
     line-height: 0.9em;
     font-family: "Gotham Rounded A", "Gotham Rounded B";
     font-style: normal;
@@ -88,7 +54,7 @@ export const boardStyles = css`
   }
 
   div.current > .number {
-    font-size: 2.5em;
+    font-size: 2em;
     font-family: "Gotham Rounded A", "Gotham Rounded B";
     font-style: normal;
     font-weight: 700;
@@ -122,7 +88,7 @@ export const boardStyles = css`
 
   ul.letters li {
     color: red;
-    font-size: 7em;
+    font-size: 6em;
     font-family: "Gotham Rounded A", "Gotham Rounded B";
     font-style: normal;
     font-weight: 700;
@@ -131,7 +97,7 @@ export const boardStyles = css`
   ul.numbers {
     grid-column: 2 / 3;
     color: white;
-    padding: 0 2.5em;
+    padding: 0 1.25em;
   }
 
   ul.numbers li ul {
@@ -143,7 +109,7 @@ export const boardStyles = css`
   }
 
   ul.numbers li ul li.number {
-    font-size: 3.25em;
+    font-size: 3em;
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
     font-family: "Gotham Rounded A", "Gotham Rounded B";
     font-style: normal;

@@ -10,6 +10,14 @@ export const boardStyles = css `
     user-select: none;
   }
 
+  :host {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+  }
 
   div.board {
     position: relative;
@@ -18,15 +26,21 @@ export const boardStyles = css `
     grid-template-rows: repeat(5, 1fr);
     background: #222;
     width: 100%;
-    height: 100%;
+    height:100%;
     font-family: Helvetica, sans-serif;
     font-weight: 800;
+  }
+
+  div.board:fullscreen,
+  div.board:-webkit-full-screen,
+  div.board:-moz-full-screen {
+    height: 80vh;
   }
 
   .button {
     width: 1em;
     height: 1em;
-    border: 2px solid black;
+    border: 2px solid #222;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -75,11 +89,11 @@ export const boardStyles = css `
     font-size: 5rem;
     font-weight: 700;
     background: white;
-    color: black;
+    color: #222;
   }
 
   div.current > .letter {
-    font-size: 5.5em;
+    font-size: 7em;
     line-height: 0.9em;
     font-family: "Gotham Rounded A", "Gotham Rounded B";
     font-style: normal;
@@ -87,7 +101,7 @@ export const boardStyles = css `
   }
 
   div.current > .number {
-    font-size: 2.5em;
+    font-size: 2.7em;
     font-family: "Gotham Rounded A", "Gotham Rounded B";
     font-style: normal;
     font-weight: 700;
@@ -130,7 +144,7 @@ export const boardStyles = css `
   ul.numbers {
     grid-column: 2 / 3;
     color: white;
-    padding: 0 3em;
+    padding: 0 2em;
   }
 
   ul.numbers li ul {
@@ -142,11 +156,11 @@ export const boardStyles = css `
   }
 
   ul.numbers li ul li.number {
-    font-size: 2.75em;
+    font-size: 3.25em;
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
     font-family: "Gotham Rounded A", "Gotham Rounded B";
     font-style: normal;
-    font-weight: 700;
+    font-weight: 500;
     border-radius: 50%;
     width: 1.8em;
     height: 1.8em;

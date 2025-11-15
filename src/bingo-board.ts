@@ -44,9 +44,6 @@ export class BingoBoard extends LitElement {
   private _currentLetterNumber: LetterNumber | undefined = undefined
 
   @state()
-  private _isHelpShowing = false
-
-  @state()
   private _markedNumbers: number[] = []
 
   connectedCallback() {
@@ -77,14 +74,6 @@ export class BingoBoard extends LitElement {
     }
   }
 
-  _makeFullscreen() {
-    // Make full screen.
-    const el = this.shadowRoot?.querySelector('.board')
-    if (el) {
-      el.requestFullscreen()
-    }
-  }
-
   private _toggleNumber(number: number, e: MouseEvent) {
     e.stopPropagation()
     debugger
@@ -110,24 +99,11 @@ export class BingoBoard extends LitElement {
 
 
   render() {
-
-    const help = this._isHelpShowing ? html`
-      <div class="help-modal"
-        @click=${() => this._isHelpShowing = false}
-      >
-        <div class="help__content">
-          <div class="help__close button" role="button" @click=${() => this._isHelpShowing = false}>✖</div>
-          <h1>How to play</h1>
-          <p>Click on a number to mark it and display it in the current area.</p>
-          <p>Click on BINGO to start a new game.</p>
-        </div>
-        
-      </div>` : nothing
-
     return html`
-      ${help}
       <div class="board"
-        @click=${() => this._makeFullscreen()}
+        @click=${() => {
+          this.dispatchEvent(new CustomEvent('request-fullscreen', { bubbles: true, composed: true }))
+        }}
       >
         <ul role="button" class="letters" @click=${() => this._startGame(true)}>
           ${letters.map(letter => html`<li>${letter}</li>`)}
@@ -138,10 +114,6 @@ export class BingoBoard extends LitElement {
         <div class="current">
           <div class="letter">${this._currentLetterNumber?.letter}</div>
           <div class="number">${this._currentLetterNumber?.number}</div>
-          <div class="help button" role="button" @click=${(e: MouseEvent) => {
-        e.stopPropagation()
-        this._isHelpShowing = true
-      }}>?</div>
         </div>
       </div>
     `
